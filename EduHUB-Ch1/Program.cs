@@ -77,3 +77,9 @@ foreach (var registration in registrations)
     var attended = checkIns.Any(c => c.RegistrationId == registration.Id);
     Console.WriteLine($"- {memberById[registration.MemberId].Name}: {(attended ? "đã check-in" : "chưa check-in")}");
 }
+
+// bước 8 Minh hoạ bất biến: Cancelled là trạng thái cuối
+Step(8, "Kiểm tra quy tắc nghiệp vụ");
+registrations[1].Cancel();
+try { registrations[1].Confirm(); }
+catch (InvalidOperationException ex) { Console.WriteLine($"Đúng như mong đợi: {ex.Message}"); }
