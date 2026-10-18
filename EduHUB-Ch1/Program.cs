@@ -4,6 +4,7 @@ using EduHUB_Ch1.Domain;
 Console.OutputEncoding = Encoding.UTF8;
 
 const string Separator = "==========================";
+const int EventCapacity = 50;
 
 
 static void Step(int number, string title) => Console.WriteLine($"\n {Separator}\n Bước {number}:{title}\n{Separator}");
@@ -29,3 +30,9 @@ foreach (var member in members)
     Console.WriteLine($" + {member} <{member.Email}> " );
 }
 Console.WriteLine($"Tổng thành viên: {club.MemberCount()}");
+
+
+// Bước 3 - tạo sự kiện
+Step(3, "Tạo sự kiện");
+var workshop = Event.Create(club.Id, "Workshop AI", DateTime.Today.AddDays(7).AddHours(14), EventCapacity);
+Console.WriteLine($"Sự kiện: {workshop.Title} - {workshop.Date:dd/MM/yyyy HH:mm}");
