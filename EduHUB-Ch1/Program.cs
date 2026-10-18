@@ -66,3 +66,14 @@ foreach (var registration in registrations)
 Step(6, "Check-in");
 var checkIns = new List<CheckIn> { CheckIn.Create(registrations[0], CheckInMethod.QrCode) };
 Console.WriteLine(checkIns[0].Summary());
+
+// Báo cáo tham dự
+Step(7, "Báo cáo tham dự");
+Console.WriteLine($"Số đăng ký: {registrations.Count}/{workshop.Capacity}");
+Console.WriteLine($"Số check-in: {checkIns.Count}");
+var memberById = members.ToDictionary(m => m.Id);
+foreach (var registration in registrations)
+{
+    var attended = checkIns.Any(c => c.RegistrationId == registration.Id);
+    Console.WriteLine($"- {memberById[registration.MemberId].Name}: {(attended ? "đã check-in" : "chưa check-in")}");
+}
