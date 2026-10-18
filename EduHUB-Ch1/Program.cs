@@ -1,5 +1,6 @@
-using System.Text;
+using EduHub.Ch01.Domain;
 using EduHUB_Ch1.Domain;
+using System.Text;
 
 Console.OutputEncoding = Encoding.UTF8;
 
@@ -60,3 +61,8 @@ foreach (var registration in registrations)
     registration.Confirm();
     Console.WriteLine($"Phiếu {registration.Id.ToString()[..8]} → {registration.Status}");
 }
+
+// Bước 6 — 1 thành viên check-in
+Step(6, "Check-in");
+var checkIns = new List<CheckIn> { CheckIn.Create(registrations[0], CheckInMethod.QrCode) };
+Console.WriteLine(checkIns[0].Summary());
